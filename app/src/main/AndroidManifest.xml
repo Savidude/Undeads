@@ -19,7 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tabs.Tab1.tab1_popup"></activity>
+        <activity
+            android:name=".Tabs.Tab1.tab1_popup"
+            android:label="Job Available"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
     </application>
 
 </manifest>

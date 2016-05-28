@@ -89,10 +89,7 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, ArrayLi
             }
         } else if (params[0].equals("view")) {
             String url_String = "http://undeads.net23.net/api/getAcceptedJobOffers.php";
-            System.out.println("before try catch (else-if)");
-
             try {
-                System.out.println("Entered Try - Catch FOR VIEW");
                 URL url = new URL(url_String);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -100,19 +97,12 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, ArrayLi
                 httpURLConnection.setDoInput(true);
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
-                System.out.println("1");
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                System.out.println("2");
                 String postData = URLEncoder.encode("nic","UTF-8")+"="+URLEncoder.encode("960093356V","UTF-8");
-                System.out.println("3");
                 bufferedWriter.write(postData);
-                System.out.println("4");
                 bufferedWriter.flush();
-                System.out.println("5");
                 bufferedWriter.close();
-                System.out.println("6");
                 outputStream.close();
-                System.out.println("7");
 
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
@@ -142,7 +132,7 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, ArrayLi
                     jobOffer.setJobDescription(jsonData.getString("Job_Title_Description"));
                     jobOffer.setPending(Integer.valueOf(jsonData.getString("Pending")));
                     jobOffer.setOrganizationName(jsonData.getString("Organization_Name"));
-                    jobOffer.setStartTime(jsonData.getString("Start_Tme"));
+                    jobOffer.setStartTime(jsonData.getString("Start_Time"));
                     jobOffer.setEndTime(jsonData.getString("End_Time"));
 
                     jobOffers.add(jobOffer);

@@ -1,5 +1,6 @@
 package savidude.com.undeads.Tabs.Tab1;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class OfferStatusTab extends Fragment {
 
     CustomAdapter_Tab1 adapter;
     private List<AcceptedJobOffer> rowItems;
+
+    public  final static String SER_KEY = "ser.jobOffer";
 
 
     @Override
@@ -59,7 +63,7 @@ public class OfferStatusTab extends Fragment {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
-               try {
+                try {
                     rowItems = fetchTimelineAsync(0);
                     adapter = new CustomAdapter_Tab1(getActivity(), rowItems);
                     lv.setAdapter(adapter);
@@ -78,6 +82,18 @@ public class OfferStatusTab extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                int selectedItemID = lv.getSelectedItemPosition();
+                AcceptedJobOffer jobOffer = rowItems.get(i);
+                Intent mIntent = new Intent(getActivity(), tab1_popup.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable(SER_KEY, jobOffer);
+                mIntent.putExtras(mBundle);
+                startActivity(mIntent);
+            }
+        });
 
         return view;
     }

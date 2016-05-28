@@ -4,30 +4,42 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class PageAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[] { "Tab1", "Tab2", "Tab3","Tab4" };
-    private Context context;
+import savidude.com.undeads.Tabs.JobTab;
+import savidude.com.undeads.Tabs.OfferStatusTab;
 
-    public PageAdapter(FragmentManager fm, Context context) {
+public class PageAdapter extends FragmentStatePagerAdapter {
+    int mNumOfTabs;
+
+    public PageAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
-        this.context = context;
-    }
-
-    @Override
-    public int getCount() {
-        return PAGE_COUNT;
+        this.mNumOfTabs = NumOfTabs;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return JobTab.newInstance(position + 1);
+
+        switch (position) {
+            case 0:
+                OfferStatusTab tab1 = new OfferStatusTab();
+                return tab1;
+            case 1:
+                JobTab tab2 = new JobTab();
+                return tab2;
+            case 2:
+                JobTab tab3 = new JobTab();
+                return tab3;
+            case 3:
+                JobTab tab4 = new JobTab();
+                return tab4;
+            default:
+                return null;
+        }
     }
 
     @Override
-    public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-        return tabTitles[position];
+    public int getCount() {
+        return mNumOfTabs;
     }
 }

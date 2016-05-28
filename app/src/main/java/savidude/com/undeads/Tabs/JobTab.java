@@ -1,4 +1,4 @@
-package savidude.com.undeads;
+package savidude.com.undeads.Tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,28 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import savidude.com.undeads.R;
+
 // In this case, the fragment displays simple text based on the page
 public class JobTab extends Fragment {
-    public static final String ARG_PAGE = "ARG_PAGE";
-
-    private int mPage;
 
     //refresh swipe
-    private SwipeRefreshLayout swipeContainer;
+    private SwipeRefreshLayout swipeContainer2;
 
-    public static JobTab newInstance(int page) {
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
-        JobTab fragment = new JobTab();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
-
     }
 
 
@@ -39,9 +29,9 @@ public class JobTab extends Fragment {
         View view = inflater.inflate(R.layout.job_tab, container, false);
 
         // Lookup the swipe container view
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer2 = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainerTab2);
         // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeContainer2.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Your code to refresh the list here.
@@ -51,17 +41,16 @@ public class JobTab extends Fragment {
             }
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+        swipeContainer2.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        //TextView textView = (TextView) view.findViewById(R.id.test1);
-        ListView lv = (ListView) view.findViewById(R.id.lvItems);
-        //textView.setText("Page #" + mPage);
+        ListView lv = (ListView) view.findViewById(R.id.allJobsListview);
         return view;
     }
 
+    //method used to retrieve all jobs
     public void fetchTimelineAsync(int page) {
         // Send the network request to fetch the updated data
         // `client` here is an instance of Android Async HTTP

@@ -27,27 +27,29 @@ import android.support.v7.app.AlertDialog;
 
 import savidude.com.undeads.Models.AcceptedJobOffer;
 
-public class AcceptedJobOffersController extends AsyncTask<String, Void, String> {
+public class AcceptedJobOffersController extends AsyncTask<String, Void, ArrayList<AcceptedJobOffer>> {
 
     private Context context;
     private AlertDialog alertDialog;
+    ArrayList<AcceptedJobOffer> jobOffers;
 
     public AcceptedJobOffersController(Context context) {
         this.context = context;
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected ArrayList<AcceptedJobOffer> doInBackground(String... params) {
 
-        ArrayList<AcceptedJobOffer> jobOffers;
+
 
         if (params[0].equals("create")) {
             String url_String = "http://undeads.net23.net/api/create_product.php";
-
+            System.out.println("Entered Try - Catch");
             try {
-                String name = params[1];
-                String price = params[2];
-                String description = params[3];
+                System.out.println("Entered Try - Catch ( if)");
+                String nic = params[1];
+                String job_offer_id = params[2];
+                String pendingStatus = params[3];
 
                 URL url = new URL(url_String);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -57,9 +59,9 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
-                        URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") + "&" +
-                        URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(description, "UTF-8");
+                String postData = URLEncoder.encode("National_ID", "UTF-8") + "=" + URLEncoder.encode(nic, "UTF-8") + "&" +
+                        URLEncoder.encode("Job_Offer_ID", "UTF-8") + "=" + URLEncoder.encode(job_offer_id, "UTF-8") + "&" +
+                        URLEncoder.encode("Pending", "UTF-8") + "=" + URLEncoder.encode(pendingStatus, "UTF-8");
                 bufferedWriter.write(postData);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -78,7 +80,7 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
                 inputStream.close();
                 httpURLConnection.disconnect();
 
-                return result;
+                //return result;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -86,9 +88,11 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
                 e.printStackTrace();
             }
         } else if (params[0].equals("view")) {
-            String url_String = "http://undeads.net23.net/api/getAcceptedJobOffers.php/960093356V";
+            String url_String = "http://undeads.net23.net/api/getAcceptedJobOffers.php";
+            System.out.println("before try catch (else-if)");
 
             try {
+                System.out.println("Entered Try - Catch FOR VIEW");
                 URL url = new URL(url_String);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -96,12 +100,19 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
                 httpURLConnection.setDoInput(true);
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
+                System.out.println("1");
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = null;
-                bufferedWriter.write("");
+                System.out.println("2");
+                String postData = URLEncoder.encode("nic","UTF-8")+"="+URLEncoder.encode("960093356V","UTF-8");
+                System.out.println("3");
+                bufferedWriter.write(postData);
+                System.out.println("4");
                 bufferedWriter.flush();
+                System.out.println("5");
                 bufferedWriter.close();
+                System.out.println("6");
                 outputStream.close();
+                System.out.println("7");
 
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
@@ -115,8 +126,10 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-
+                System.out.println("8");
                 String[] resultParts = result.split("<");
+                System.out.println("PART1: "+ resultParts[0].trim());
+                System.out.println("PART2: "+ resultParts[1]);
 
                 JSONArray jsonArray = new JSONArray(resultParts[0]);
 
@@ -124,7 +137,7 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonData = jsonArray.getJSONObject(i);
-
+                    System.out.println("ENTERED FOR LOOP");
                     AcceptedJobOffer jobOffer = new AcceptedJobOffer();
                     jobOffer.setJobDescription(jsonData.getString("Job_Title_Description"));
                     jobOffer.setPending(Integer.valueOf(jsonData.getString("Pending")));
@@ -132,13 +145,7 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
                     jobOffers.add(jobOffer);
                 }
 
-                String desc = "";
-
-                for (AcceptedJobOffer jobOffer : jobOffers) {
-                    desc += jobOffer.getJobDescription() + "\t" + jobOffer.getPending() + "\n";
-                }
-
-                return desc;
+                //return jobOffers;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -149,19 +156,16 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, String>
             }
         }
 
-        return null;
+        return jobOffers;
     }
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Add Job Offer status");
+
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        alertDialog.setMessage(s);
-        alertDialog.show();
+    protected void onPostExecute(ArrayList<AcceptedJobOffer> jobOffers) {
+        //return jobOffers;
     }
-
 }

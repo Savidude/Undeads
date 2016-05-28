@@ -25,6 +25,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        System.out.println("Alarm Reciver called");
+
         String job_Description = "Death God";
         String start_Time = "29-05-2016 00:00";
         String end_Time = "31-12-9999 00:00";
@@ -33,6 +35,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void createNotification(Context context, String job_description, String start_time, String end_time) {
+
+        System.out.println("create notification called");
 
         String startTime[] = start_time.split(" ");
         String endTime[] = end_time.split(" ");
@@ -56,7 +60,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     public static void alarmSet(Context context){
-        Long alarmTime = new GregorianCalendar().getTimeInMillis() + 60 * 1000;
+        Long alarmTime = new GregorianCalendar().getTimeInMillis() + 5 * 1000;
 
         Intent alarmIntent = new Intent(context, AlarmReceiver.class);
 

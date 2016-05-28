@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import savidude.com.undeads.CustomAdapter;
+import savidude.com.undeads.Models.AcceptedJobOffer;
 import savidude.com.undeads.R;
 
 // In this case, the fragment displays simple text based on the page
@@ -15,6 +20,11 @@ public class OfferStatusTab extends Fragment {
 
     //refresh swipe
     private SwipeRefreshLayout swipeContainer1;
+
+    CustomAdapter adapter;
+    private List<AcceptedJobOffer> rowItems;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,11 @@ public class OfferStatusTab extends Fragment {
                 android.R.color.holo_red_light);
 
         ListView lv = (ListView) view.findViewById(R.id.offerStatusListview);
+        rowItems = new ArrayList<AcceptedJobOffer>();
+        rowItems.add(0, new AcceptedJobOffer(0, "0", "963220790V", 1));
+        adapter = new CustomAdapter(getActivity(), rowItems);
+        lv.setAdapter(adapter);
+        //lv.setOnItemClickListener(this);
         return view;
     }
 

@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import savidude.com.undeads.R;
 
@@ -15,7 +14,6 @@ public class JobTab extends Fragment {
 
     //refresh swipe
     private SwipeRefreshLayout swipeContainer2;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +44,10 @@ public class JobTab extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        ListView lv = (ListView) view.findViewById(R.id.allJobsListview);
+
         return view;
     }
+
 
     //method used to retrieve all jobs
     public void fetchTimelineAsync(int page) {

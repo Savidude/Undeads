@@ -48,7 +48,7 @@ package savidude.com.undeads.Tabs.Tab2;
             if (convertView == null) {
                 LayoutInflater mInflater = (LayoutInflater) context
                         .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-                convertView = mInflater.inflate(R.layout.custom_listview_tab1, null);
+                convertView = mInflater.inflate(R.layout.custom_listview_tab2, null);
             }
 
             TextView org_name = (TextView) convertView.findViewById(R.id.org_name);

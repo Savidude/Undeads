@@ -92,13 +92,13 @@ public class AvailableJobOffersController extends AsyncTask<String, Void, ArrayL
             System.out.println("before try catch (else-if)");
 
             try {
-                System.out.println("Entered Try - Catch FOR VIEW");
+                System.out.println("1");
                 URL url = new URL(url_String);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
-
+                System.out.println("2");
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String postData = URLEncoder.encode("nic","UTF-8")+"="+URLEncoder.encode("960093356V","UTF-8");
@@ -106,27 +106,27 @@ public class AvailableJobOffersController extends AsyncTask<String, Void, ArrayL
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
-
+                System.out.println("3");
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-
+                System.out.println("4");
                 String result = "";
                 String line = "";
-
+                System.out.println("5");
                 while ((line = bufferedReader.readLine()) != null) {
                     result += line + "\n";
                 }
-
+                System.out.println("6");
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                System.out.println("8");
+                System.out.println("7");
                 String[] resultParts = result.split("<");
 
                 JSONArray jsonArray = new JSONArray(resultParts[0]);
-
+                System.out.println(resultParts[0]);
                 jobOffers = new ArrayList<>();
-
+                System.out.println("8");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonData = jsonArray.getJSONObject(i);
 
@@ -135,7 +135,7 @@ public class AvailableJobOffersController extends AsyncTask<String, Void, ArrayL
                     allJobOffer.setEndTime(jsonData.getString("End_Time"));
                     allJobOffer.setOrgName(jsonData.getString("Organization_Name"));
                     allJobOffer.setQuantity(Integer.valueOf(jsonData.getString("Quantity")));
-                    allJobOffer.setStartTime(jsonData.getString("Start_Tme"));
+                    allJobOffer.setStartTime(jsonData.getString("Start_Time"));
 
                     jobOffers.add(allJobOffer);
                 }

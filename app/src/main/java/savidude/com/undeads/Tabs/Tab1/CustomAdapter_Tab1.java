@@ -8,6 +8,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +63,29 @@ public class CustomAdapter_Tab1 extends BaseAdapter {
         AcceptedJobOffer row_pos = rowItem.get(position);
 
         job_desc.setText(row_pos.getJobDescription());
-        job_status.setText(String.valueOf(row_pos.getPending()));
+        int statusCode = row_pos.getPending();
 
+        String statusText;
+        switch (statusCode) {
+            case 0:
+                statusText = "Pending";
+                job_status.setText(statusText);
+                job_status.setTextColor(Color.DKGRAY);
+                break;
+            case 1:
+                statusText = "Rejected";
+                job_status.setText(statusText);
+                job_status.setTextColor(Color.RED);
+                break;
+            case 2:
+                statusText = "Accepted";
+                job_status.setText(statusText);
+                job_status.setTextColor(Color.GREEN);
+                break;
+            default:
+                statusText = null;
+                break;
+        }
         return convertView;
 
     }

@@ -27,7 +27,6 @@ public class OfferStatusTab extends Fragment {
     private List<AcceptedJobOffer> rowItems;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +38,18 @@ public class OfferStatusTab extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.offers_status, container, false);
 
+        final ListView lv = (ListView) view.findViewById(R.id.offerStatusListview);
+        try {
+            rowItems = fetchTimelineAsync(0);
+            adapter = new CustomAdapter_Tab1(getActivity(), rowItems);
+            lv.setAdapter(adapter);
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Lookup the swipe container view
         swipeContainer1 = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainerTab1);
         // Setup refresh listener which triggers new data loading
@@ -48,18 +59,17 @@ public class OfferStatusTab extends Fragment {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
-                ListView lv = (ListView) view.findViewById(R.id.offerStatusListview);
-                try {
-                    rowItems = fetchTimelineAsync();
+               try {
+                    rowItems = fetchTimelineAsync(0);
                     adapter = new CustomAdapter_Tab1(getActivity(), rowItems);
                     lv.setAdapter(adapter);
-                    swipeContainer1.setRefreshing(false);
+
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+                swipeContainer1.setRefreshing(false);
             }
         });
         // Configure the refreshing colors
@@ -73,7 +83,7 @@ public class OfferStatusTab extends Fragment {
     }
 
     //method called to refresh jobs offer statuses
-    public List<AcceptedJobOffer> fetchTimelineAsync() throws ExecutionException, InterruptedException {
+    public List<AcceptedJobOffer> fetchTimelineAsync(int page) throws ExecutionException, InterruptedException {
         String type = "view";
         AcceptedJobOffersController backgroundWorker = new AcceptedJobOffersController(this.getContext());
         AsyncTask<String, Void, ArrayList<AcceptedJobOffer>> test = new AcceptedJobOffersController(this.getContext()).execute(type);

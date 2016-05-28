@@ -1,13 +1,11 @@
 package savidude.com.undeads;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import savidude.com.undeads.Tabs.JobTab;
-import savidude.com.undeads.Tabs.OfferStatusTab;
+import savidude.com.undeads.Tabs.Tab2.JobTab;
+import savidude.com.undeads.Tabs.Tab1.OfferStatusTab;
 
 public class PageAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;

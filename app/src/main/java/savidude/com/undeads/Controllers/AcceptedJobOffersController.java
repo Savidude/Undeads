@@ -3,6 +3,7 @@ package savidude.com.undeads.Controllers;
 /**
  * Created by Imaadh Rizni on 5/28/2016.
  */
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -26,19 +27,21 @@ import android.support.v7.app.AlertDialog;
 
 import savidude.com.undeads.Models.AcceptedJobOffer;
 
-public class JobController extends AsyncTask<String, Void, String> {
+public class AcceptedJobOffersController extends AsyncTask<String, Void, String> {
 
     private Context context;
     private AlertDialog alertDialog;
 
-    public JobController(Context context){
+    public AcceptedJobOffersController(Context context) {
         this.context = context;
     }
 
     @Override
     protected String doInBackground(String... params) {
 
-        if (params[0].equals("create")){
+        ArrayList<AcceptedJobOffer> jobOffers;
+
+        if (params[0].equals("create")) {
             String url_String = "http://undeads.net23.net/api/create_product.php";
 
             try {
@@ -47,16 +50,16 @@ public class JobController extends AsyncTask<String, Void, String> {
                 String description = params[3];
 
                 URL url = new URL(url_String);
-                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = URLEncoder.encode("name", "UTF-8")+"="+URLEncoder.encode(name, "UTF-8")+ "&" +
-                        URLEncoder.encode("price", "UTF-8")+"="+URLEncoder.encode(price, "UTF-8") + "&" +
-                        URLEncoder.encode("description", "UTF-8")+"="+URLEncoder.encode(description, "UTF-8");
+                String postData = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
+                        URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") + "&" +
+                        URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(description, "UTF-8");
                 bufferedWriter.write(postData);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -68,7 +71,7 @@ public class JobController extends AsyncTask<String, Void, String> {
                 String result = "";
                 String line = "";
 
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line + "\n";
                 }
                 bufferedReader.close();
@@ -82,12 +85,12 @@ public class JobController extends AsyncTask<String, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else if (params[0].equals("view")){
-            String url_String = "http://undeads.net23.net/api/get_all_products.php";
+        } else if (params[0].equals("view")) {
+            String url_String = "http://undeads.net23.net/api/getAcceptedJobOffers.php/960093356V";
 
             try {
                 URL url = new URL(url_String);
-                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -106,7 +109,7 @@ public class JobController extends AsyncTask<String, Void, String> {
                 String result = "";
                 String line = "";
 
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line + "\n";
                 }
                 bufferedReader.close();
@@ -117,23 +120,22 @@ public class JobController extends AsyncTask<String, Void, String> {
 
                 JSONArray jsonArray = new JSONArray(resultParts[0]);
 
-                ArrayList<AcceptedJobOffer> products = new ArrayList<>();
+                jobOffers = new ArrayList<>();
 
-                for(int i=0; i<jsonArray.length(); i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonData = jsonArray.getJSONObject(i);
 
                     AcceptedJobOffer jobOffer = new AcceptedJobOffer();
                     jobOffer.setJobDescription(jsonData.getString("Job_Title_Description"));
-                    jobOffer.setPending(jsonData.getString("Pending"));
-                    jobOffer.setDescription(jsonData.getString("description"));
+                    jobOffer.setPending(Integer.valueOf(jsonData.getString("Pending")));
 
-                    products.add(product);
+                    jobOffers.add(jobOffer);
                 }
 
                 String desc = "";
 
-                for(Product product: products){
-                    desc += product.getName() + "\t" + product.getPrice() + "\t" + product.getDescription() + "\n";
+                for (AcceptedJobOffer jobOffer : jobOffers) {
+                    desc += jobOffer.getJobDescription() + "\t" + jobOffer.getPending() + "\n";
                 }
 
                 return desc;
@@ -153,7 +155,7 @@ public class JobController extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Add product status");
+        alertDialog.setTitle("Add Job Offer status");
     }
 
     @Override
@@ -162,4 +164,4 @@ public class JobController extends AsyncTask<String, Void, String> {
         alertDialog.show();
     }
 
-
+}

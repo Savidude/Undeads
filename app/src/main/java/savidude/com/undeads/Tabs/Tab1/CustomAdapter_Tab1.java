@@ -1,4 +1,4 @@
-package savidude.com.undeads;
+package savidude.com.undeads.Tabs.Tab1;
 
 /**
  * Created by Imaadh Rizni on 5/28/2016.
@@ -15,14 +15,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import savidude.com.undeads.Models.AcceptedJobOffer;
+import savidude.com.undeads.R;
 
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapter_Tab1 extends BaseAdapter {
 
     Context context;
     List<AcceptedJobOffer> rowItem;
 
-    public CustomAdapter(Context context, List<AcceptedJobOffer> rowItem) {
+    public CustomAdapter_Tab1(Context context, List<AcceptedJobOffer> rowItem) {
         this.context = context;
         this.rowItem = rowItem;
 

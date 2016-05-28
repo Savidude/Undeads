@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
+import android.widget.Toast;
 
 
 import java.util.GregorianCalendar;
@@ -24,9 +25,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        String job_Description = "";
-        String start_Time = "";
-        String end_Time = "";
+        String job_Description = "Death God";
+        String start_Time = "29-05-2016 00:00";
+        String end_Time = "31-12-9999 00:00";
 
         createNotification(context, job_Description, start_Time, end_Time);
     }
@@ -62,7 +63,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, PendingIntent.getBroadcast(context, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
 
     }
 }

@@ -1,7 +1,9 @@
 package savidude.com.undeads;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -11,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import savidude.com.undeads.Controllers.AlarmReceiver;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,6 +56,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        int i = preferences.getInt("numberOfLaunch", 1);
+
+        if(i < 2){
+            AlarmReceiver.alarmSet(this);
+            Toast.makeText(MainActivity.this, "Start Time", Toast.LENGTH_LONG).show();
+            i++;
+            editor.putInt("numberOfLaunch", i);
+            editor.commit();
+        }
+
     }
 
     @Override

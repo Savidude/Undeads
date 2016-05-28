@@ -11,6 +11,9 @@ public class getAllJobOffers {
     private int quantity;
     private String jobTitleDescription;
 
+    public getAllJobOffers() {
+    }
+
     public getAllJobOffers(String orgName, String startTime, String endTime, int quantity, String jobTitleDescription) {
         this.orgName = orgName;
         this.startTime = startTime;

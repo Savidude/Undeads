@@ -59,7 +59,14 @@ package savidude.com.undeads.Tabs.Tab2;
 
             org_name.setText(row_pos.getOrgName());
             job_desc.setText(row_pos.getJobTitleDescription());
-            working_time.setText(row_pos.getStartTime()+" "+row_pos.getEndTime());
+
+            String work_Time_Start = row_pos.getStartTime();
+            String work_Time_End = row_pos.getEndTime();
+
+            String[] holdStart = work_Time_Start.split(" ");
+            String[] holdEnd = work_Time_End.split(" ");
+
+            working_time.setText(holdStart[0]+"\t"+holdStart[1]+" - "+holdEnd[1]);
 
             return convertView;
 

@@ -3,7 +3,7 @@ require "db_connect.php";
 
 $nic = $_POST["nic"];
 
-$mysql_qry = "SELECT * from employee where National_ID = " .$nic . ";";
+$mysql_qry = "SELECT * from employee where National_ID = '" .$nic . "';";
 
 $result = mysqli_query($conn ,$mysql_qry);
 
@@ -18,7 +18,5 @@ if(mysqli_num_rows($result) > 0) {
 else {
 	echo "Select success";
 }
-
-conn->close();
 
 ?>

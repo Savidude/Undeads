@@ -141,6 +141,9 @@ public class AcceptedJobOffersController extends AsyncTask<String, Void, ArrayLi
                     AcceptedJobOffer jobOffer = new AcceptedJobOffer();
                     jobOffer.setJobDescription(jsonData.getString("Job_Title_Description"));
                     jobOffer.setPending(Integer.valueOf(jsonData.getString("Pending")));
+                    jobOffer.setOrganizationName(jsonData.getString("Organization_Name"));
+                    jobOffer.setStartTime(jsonData.getString("Start_Tme"));
+                    jobOffer.setEndTime(jsonData.getString("End_Time"));
 
                     jobOffers.add(jobOffer);
                 }

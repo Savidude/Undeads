@@ -1,4 +1,4 @@
-package Models;
+package savidude.com.undeads.Models;
 
 /**
  * Created by sky on 5/28/2016.

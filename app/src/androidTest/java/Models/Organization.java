@@ -5,14 +5,14 @@ package Models;
  */
 public class Organization {
 
-    private String orgId;
+    private int orgId;
     private String name;
     private String des;
     private String managerName;
     private String contactInfo;
     private String email;
 
-    public Organization(String orgId, String name, String des, String managerName, String contactInfo, String email) {
+    public Organization(int orgId, String name, String des, String managerName, String contactInfo, String email) {
         this.orgId = orgId;
         this.name = name;
         this.des = des;
@@ -21,11 +21,11 @@ public class Organization {
         this.email = email;
     }
 
-    public String getId() {
+    public int getOrgId() {
         return orgId;
     }
 
-    public void setId(String orgId) {
+    public void setOrgId(int orgId) {
         this.orgId = orgId;
     }
 

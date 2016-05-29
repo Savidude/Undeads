@@ -28,36 +28,89 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textSize="26sp"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:text="Job Category:"/>
+
+                <TextView
                     android:id="@+id/jobDescriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
+                    android:gravity="left"
+                    android:paddingLeft="16dp"
                     android:layout_weight="1"
-                    android:textSize="26sp" />
+                    android:textSize="20sp"
+                    android:padding="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textSize="25sp"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:text="Organisation:"/>
 
                 <TextView
                     android:id="@+id/organizationNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="22sp"/>
+                    android:gravity="left"
+                    android:paddingLeft="16dp"
+                    android:textSize="20sp"
+                    android:padding="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textSize="25sp"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:text="Start Date &amp; Time:"/>
 
                 <TextView
                     android:id="@+id/startTimeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="22sp"/>
+                    android:gravity="left"
+                    android:paddingLeft="16dp"
+                    android:textSize="20sp"
+                    android:padding="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textSize="25sp"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:text="End Date &amp; Time:"/>
 
                 <TextView
                     android:id="@+id/endTimeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="22sp"/>
+                    android:gravity="left"
+                    android:paddingLeft="16dp"
+                    android:textSize="20sp"
+                    android:padding="20dp"/>
 
                 <TextView
                     android:id="@+id/statusTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="28sp"/>
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    android:textSize="30sp"/>
 
             </LinearLayout>
         </ScrollView>

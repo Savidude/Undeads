@@ -37,5 +37,14 @@ public class tab2_popup extends AppCompatActivity {
         endTime.setText(job.getEndTime());
         quantity.setText(String.valueOf(job.getQuantity()));
 
+        String[] startDateTimeSplit = job.getStartTime().split(":");
+        String[] startTimeSplit = startDateTimeSplit[1].split("-");
+        String finalStartDateTime = startDateTimeSplit[0] + "     " + new StringBuilder().append(startTimeSplit[0]).append(":").append(startTimeSplit[1]);
+        startTime.setText(finalStartDateTime);
+
+        String[] endDateTimeSplit = job.getEndTime().split(":");
+        String[] endTimeSplit = endDateTimeSplit[1].split("-");
+        String finalEndDateTime = endDateTimeSplit[0] + "     " + new StringBuilder().append(endTimeSplit[0]).append(":").append(endTimeSplit[1]);
+        endTime.setText(finalEndDateTime);
     }
 }

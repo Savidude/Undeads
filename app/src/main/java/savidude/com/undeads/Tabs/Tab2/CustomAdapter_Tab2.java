@@ -63,10 +63,10 @@ package savidude.com.undeads.Tabs.Tab2;
             String work_Time_Start = row_pos.getStartTime();
             String work_Time_End = row_pos.getEndTime();
 
-            String[] holdStart = work_Time_Start.split(":");
-            String[] holdEnd = work_Time_End.split(":");
+            String[] holdStart = work_Time_Start.split(" ");
+            String[] holdEnd = work_Time_End.split(" ");
 
-            working_time.setText(holdStart[0]+"\t\t\t"+holdStart[1]+" - "+holdEnd[1]);
+            //working_time.setText(holdStart[0]+"\t"+holdStart[1]+" - "+holdEnd[1]);
 
             return convertView;
 

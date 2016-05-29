@@ -41,7 +41,7 @@ public class NotificationTab extends Fragment {
         final ListView lv = (ListView) view.findViewById(R.id.allJobsListview);
         try {
             rowItems = fetchTimelineAsync(0);
-            adapter = new CustomAdapter_Tab3(getActivity(), rowItems);
+            adapter = new CustomAdapter_Tab3 (getActivity(), rowItems);
             lv.setAdapter(adapter);
 
         } catch (ExecutionException e) {

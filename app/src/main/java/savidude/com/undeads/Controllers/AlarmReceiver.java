@@ -55,18 +55,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         nm.notify(1, notification.build());
 
-        AlarmReceiver.alarmSet(context);
-
-    }
-
-    public static void alarmSet(Context context){
-        Long alarmTime = new GregorianCalendar().getTimeInMillis() + 5 * 1000;
-
-        Intent alarmIntent = new Intent(context, AlarmReceiver.class);
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, PendingIntent.getBroadcast(context, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
     }
 }

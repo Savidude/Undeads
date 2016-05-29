@@ -1,13 +1,22 @@
 package savidude.com.undeads.Tabs.Tab3;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import savidude.com.undeads.Controllers.NotificationSubscriberController;
+import savidude.com.undeads.Models.Subscription;
 import savidude.com.undeads.R;
+import savidude.com.undeads.Tabs.Tab2.CustomAdapter_Tab2;
 
 /**
  * Created by FathimaShakoora on 29-May-16.
@@ -16,6 +25,8 @@ public class NotificationTab extends Fragment {
 
     //refresh swipe
     private SwipeRefreshLayout swipeContainer3;
+    CustomAdapter_Tab3 adapter;
+    private List<Subscription> rowItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,21 +34,39 @@ public class NotificationTab extends Fragment {
     }
 
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notification_tab, container, false);
+        View view = inflater.inflate(R.layout.job_tab, container, false);
+
+        final ListView lv = (ListView) view.findViewById(R.id.allJobsListview);
+        try {
+            rowItems = fetchTimelineAsync(0);
+            adapter = new CustomAdapter_Tab3(getActivity(), rowItems);
+            lv.setAdapter(adapter);
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // Lookup the swipe container view
-        swipeContainer3 = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainerTab3);
+        swipeContainer3 = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainerTab2);
         // Setup refresh listener which triggers new data loading
         swipeContainer3.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
-                fetchTimelineAsync(0);
+                try {
+                    rowItems = fetchTimelineAsync(0);
+                    adapter = new CustomAdapter_Tab3(getActivity(), rowItems);
+                    lv.setAdapter(adapter);
+
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                swipeContainer3.setRefreshing(false);
             }
         });
         // Configure the refreshing colors
@@ -51,23 +80,11 @@ public class NotificationTab extends Fragment {
     }
 
 
-    //method used to retrieve all jobs
-    public void fetchTimelineAsync(int page) {
-        // Send the network request to fetch the updated data
-        // `client` here is an instance of Android Async HTTP
-//        client.getHomeTimeline(0, new JsonHttpResponseHandler() {
-//            public void onSuccess(JSONArray json) {
-//                // Remember to CLEAR OUT old items before appending in the new ones
-//                adapter.clear();
-//                // ...the data has come back, add new items to your adapter...
-//                adapter.addAll(...);
-//                // Now we call setRefreshing(false) to signal refresh has finished
-//                swipeContainer.setRefreshing(false);
-//            }
-//
-//            public void onFailure(Throwable e) {
-//                Log.d("DEBUG", "Fetch timeline error: " + e.toString());
-//            }
-//        });
+    public List<Subscription> fetchTimelineAsync(int page) throws ExecutionException, InterruptedException {
+        String type = "view";
+        NotificationSubscriberController backgroundWorker = new NotificationSubscriberController(this.getContext());
+        AsyncTask<String, Void, ArrayList<Subscription>> test = new NotificationSubscriberController (this.getContext()).execute(type);
+        ArrayList<Subscription> allJobs = test.get();
+        return allJobs;
     }
 }

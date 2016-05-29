@@ -1,6 +1,10 @@
 package savidude.com.undeads;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +18,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.GregorianCalendar;
 
 import savidude.com.undeads.Controllers.AlarmReceiver;
 
@@ -62,7 +68,16 @@ public class MainActivity extends AppCompatActivity {
         int i = preferences.getInt("numberOfLaunch", 1);
 
         if(i < 2){
-            AlarmReceiver.alarmSet(this);
+
+            Long alarmTime = new GregorianCalendar().getTimeInMillis() + 10 * 1000;
+            System.out.println("Alarm called");
+            Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+
+            AlarmManager alarmManager = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
+
+            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, PendingIntent.getBroadcast(this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+            System.out.println("Alarm setted");
+
             Toast.makeText(MainActivity.this, "Start Time", Toast.LENGTH_LONG).show();
             i++;
             editor.putInt("numberOfLaunch", i);

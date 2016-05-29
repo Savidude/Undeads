@@ -32,8 +32,17 @@ public class tab1_popup extends AppCompatActivity {
 
         jobDescription.setText(jobOffer.getJobDescription());
         organizationName.setText(jobOffer.getOrganizationName());
-        startTime.setText(jobOffer.getStartTime());
-        endTime.setText(jobOffer.getEndTime());
+
+        String[] startDateTimeSplit = jobOffer.getStartTime().split(":");
+        String[] startTimeSplit = startDateTimeSplit[1].split("-");
+        String finalStartDateTime = startDateTimeSplit[0] + "     " + new StringBuilder().append(startTimeSplit[0]).append(":").append(startTimeSplit[1]);
+        startTime.setText(finalStartDateTime);
+
+        String[] endDateTimeSplit = jobOffer.getEndTime().split(":");
+        String[] endTimeSplit = endDateTimeSplit[1].split("-");
+        String finalEndDateTime = endDateTimeSplit[0] + "     " + new StringBuilder().append(endTimeSplit[0]).append(":").append(endTimeSplit[1]);
+        endTime.setText(finalEndDateTime);
+
         int statusCode = jobOffer.getPending();
         String statusText;
         switch (statusCode) {

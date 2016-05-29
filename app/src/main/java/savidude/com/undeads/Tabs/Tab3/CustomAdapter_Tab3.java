@@ -51,25 +51,17 @@ public class CustomAdapter_Tab3 extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.custom_listview_tab2, null);
+            convertView = mInflater.inflate(R.layout.custom_listview_tab3, null);
         }
 
-        TextView org_name = (TextView) convertView.findViewById(R.id.org_name);
-        TextView job_desc = (TextView) convertView.findViewById(R.id.job_desc);
-        TextView working_time = (TextView) convertView.findViewById(R.id.working_time);
+        TextView org_name = (TextView) convertView.findViewById(R.id.org_nameT3);
+        TextView job_desc = (TextView) convertView.findViewById(R.id.job_descT3);
+        TextView working_time = (TextView) convertView.findViewById(R.id.working_timeT3);
 
         Subscription row_pos = rowItem.get(position);
 
         org_name.setText(row_pos.getOrganization_Name());
         job_desc.setText(row_pos.getJob_Title_Description());
-
-        String work_Time_Start = row_pos.getStart_Tme();
-        String work_Time_End = row_pos.getEnd_Time();
-
-        String[] holdStart = work_Time_Start.split(":");
-        String[] holdEnd = work_Time_End.split(":");
-
-        working_time.setText(holdStart[0]+"\t\t\t"+holdStart[1]+" - "+holdEnd[1]);
 
         return convertView;
 

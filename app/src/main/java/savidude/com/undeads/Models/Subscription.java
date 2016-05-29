@@ -1,9 +1,11 @@
 package savidude.com.undeads.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by FathimaShakoora on 29-May-16.
  */
-public class Subscription {
+public class Subscription implements Serializable {
 
     String Last_Updated_Date;
     String Organization_Name;
@@ -12,6 +14,7 @@ public class Subscription {
     String End_Time;
     int Quantity;
     String Job_Title_Description;
+    String jobOfferId;
 
     public Subscription(String job_Title_Description, int quantity, String last_Updated_Date,
                         String organization_Name, String job_Offer_Added_Time, String start_Tme, String end_Time) {
@@ -26,6 +29,14 @@ public class Subscription {
     }
 
     public Subscription() {}
+
+    public String getJobOfferId() {
+        return jobOfferId;
+    }
+
+    public void setJobOfferId(String jobOfferId) {
+        this.jobOfferId = jobOfferId;
+    }
 
     public String getJob_Title_Description() {return Job_Title_Description;}
 

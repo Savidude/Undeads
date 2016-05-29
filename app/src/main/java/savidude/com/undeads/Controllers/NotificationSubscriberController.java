@@ -42,13 +42,11 @@ public class NotificationSubscriberController extends AsyncTask<String, Void, Ar
 
 
         if (params[0].equals("create")) {
-            String url_String = "http://undeads.net23.net/api/create_product.php";
+            String url_String = "http://undeads.net23.net/api/InsertAcceptedJobOffers.php";
             System.out.println("Entered Try - Catch");
             try {
                 System.out.println("Entered Try - Catch ( if)");
-                String nic = params[1];
-                String job_offer_id = params[2];
-                String pendingStatus = params[3];
+                String job_offer_id = params[1];
 
                 URL url = new URL(url_String);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -58,9 +56,8 @@ public class NotificationSubscriberController extends AsyncTask<String, Void, Ar
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = URLEncoder.encode("National_ID", "UTF-8") + "=" + URLEncoder.encode(nic, "UTF-8") + "&" +
-                        URLEncoder.encode("Job_Offer_ID", "UTF-8") + "=" + URLEncoder.encode(job_offer_id, "UTF-8") + "&" +
-                        URLEncoder.encode("Pending", "UTF-8") + "=" + URLEncoder.encode(pendingStatus, "UTF-8");
+                String postData = URLEncoder.encode("nic", "UTF-8") + "=" + URLEncoder.encode("960093356V", "UTF-8") + "&" +
+                        URLEncoder.encode("job_offer_id", "UTF-8") + "=" + URLEncoder.encode(job_offer_id, "UTF-8");
                 bufferedWriter.write(postData);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -136,7 +133,7 @@ public class NotificationSubscriberController extends AsyncTask<String, Void, Ar
                         sub.setEnd_Time(jsonData.getString("End_Time"));
                         sub.setQuantity(Integer.valueOf(jsonData.getString("Quantity")));
                         sub.setJob_Title_Description(jsonData.getString("Job_Title_Description"));
-
+                        sub.setJobOfferId(jsonData.getString("Job_Offer_ID"));
                         subscript.add(sub);
                     }
                 }

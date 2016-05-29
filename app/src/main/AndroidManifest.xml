@@ -3,8 +3,11 @@
     package="savidude.com.undeads">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
-    <receiver android:process=":remote" android:name="savidude.com.undeads.AlarmReceiver" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <receiver
+        android:name=".AlarmReceiver"
+        android:process=":remote" />
 
     <application
         android:allowBackup="true"
@@ -24,11 +27,15 @@
         <activity
             android:name=".Tabs.Tab1.tab1_popup"
             android:label="Job Status"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
             android:name=".Tabs.Tab2.tab2_popup"
             android:label="Job Available"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity
+            android:name=".Tabs.Tab3.tab3_popup"
+            android:label="@string/title_activity_tab3_popup"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"></activity>
     </application>
 
 </manifest>

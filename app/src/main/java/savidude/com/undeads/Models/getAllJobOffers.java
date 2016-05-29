@@ -12,6 +12,7 @@ public class getAllJobOffers implements Serializable {
     private String endTime;
     private int quantity;
     private String jobTitleDescription;
+    private String jobOfferId;
 
     public getAllJobOffers() {
     }
@@ -22,6 +23,14 @@ public class getAllJobOffers implements Serializable {
         this.endTime = endTime;
         this.quantity = quantity;
         this.jobTitleDescription = jobTitleDescription;
+    }
+
+    public String getJobOfferId() {
+        return jobOfferId;
+    }
+
+    public void setJobOfferId(String jobOfferId) {
+        this.jobOfferId = jobOfferId;
     }
 
     public String getOrgName() {

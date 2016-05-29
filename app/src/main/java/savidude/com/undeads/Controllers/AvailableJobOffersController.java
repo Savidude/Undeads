@@ -43,7 +43,7 @@ public class AvailableJobOffersController extends AsyncTask<String, Void, ArrayL
 
 
         if (params[0].equals("create")) {
-            String url_String = "http://undeads.net23.net/api/create_product.php";
+            String url_String = "http://undeads.net23.net/api/InsertIntoAcceptedJobOffers.php";
             System.out.println("Entered Try - Catch");
             try {
                 System.out.println("Entered Try - Catch ( if)");
@@ -59,9 +59,8 @@ public class AvailableJobOffersController extends AsyncTask<String, Void, ArrayL
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = URLEncoder.encode("National_ID", "UTF-8") + "=" + URLEncoder.encode(nic, "UTF-8") + "&" +
-                        URLEncoder.encode("Job_Offer_ID", "UTF-8") + "=" + URLEncoder.encode(job_offer_id, "UTF-8") + "&" +
-                        URLEncoder.encode("Pending", "UTF-8") + "=" + URLEncoder.encode(pendingStatus, "UTF-8");
+                String postData = URLEncoder.encode("nic", "UTF-8") + "=" + URLEncoder.encode("960093356V", "UTF-8") + "&" +
+                        URLEncoder.encode("job_offer_id", "UTF-8") + "=" + URLEncoder.encode(job_offer_id, "UTF-8");
                 bufferedWriter.write(postData);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -136,7 +135,7 @@ public class AvailableJobOffersController extends AsyncTask<String, Void, ArrayL
                     allJobOffer.setOrgName(jsonData.getString("Organization_Name"));
                     allJobOffer.setQuantity(Integer.valueOf(jsonData.getString("Quantity")));
                     allJobOffer.setStartTime(jsonData.getString("Start_Time"));
-
+                    allJobOffer.setJobOfferId(jsonData.getString("Job_Offer_ID"));
                     jobOffers.add(allJobOffer);
                 }
 

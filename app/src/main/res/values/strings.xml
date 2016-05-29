@@ -6,4 +6,5 @@
     <string name="title_activity_custom_list_adapter">CustomListAdapterActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_offers_status">offers_status</string>
+    <string name="title_activity_tab3_popup">tab3_popup</string>
 </resources>

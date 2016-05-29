@@ -41,7 +41,6 @@ public class NotificationSubscriberController extends AsyncTask<String, Void, Ar
     protected ArrayList<Subscription> doInBackground(String... params) {
 
 
-
         if (params[0].equals("create")) {
             String url_String = "http://undeads.net23.net/api/create_product.php";
             System.out.println("Entered Try - Catch");
@@ -101,7 +100,7 @@ public class NotificationSubscriberController extends AsyncTask<String, Void, Ar
                 System.out.println("2");
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = URLEncoder.encode("nic","UTF-8")+"="+URLEncoder.encode("960093356V","UTF-8");
+                String postData = URLEncoder.encode("nic", "UTF-8") + "=" + URLEncoder.encode("960093356V", "UTF-8");
                 bufferedWriter.write(postData);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -125,19 +124,23 @@ public class NotificationSubscriberController extends AsyncTask<String, Void, Ar
                 subscript = new ArrayList<>();
                 System.out.println("8");
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonData = jsonArray.getJSONObject(i);
+                    JSONArray innerArray = jsonArray.getJSONArray(i);
+                    for (int j = 0; j < innerArray.length(); j++) {
+                        JSONObject jsonData = innerArray.getJSONObject(j);
 
-                    Subscription sub = new Subscription();
-                    sub.setLast_Updated_Date(jsonData.getString("Last_Updated_Date"));
-                    sub.setOrganization_Name(jsonData.getString("Organization_Name"));
-                    sub.setJob_Offer_Added_Time(jsonData.getString("Job_Offer_Added_Time"));
-                    sub.setStart_Tme(jsonData.getString("Start_Tme"));
-                    sub.setEnd_Time(jsonData.getString("End_Time"));
-                    sub.setQuantity(Integer.valueOf(jsonData.getString("Quantity")));
-                    sub.setJob_Title_Description(jsonData.getString("Job_Title_Description"));
+                        Subscription sub = new Subscription();
+                        sub.setLast_Updated_Date(jsonData.getString("Last_Updated_Date"));
+                        sub.setOrganization_Name(jsonData.getString("Organization_Name"));
+                        sub.setJob_Offer_Added_Time(jsonData.getString("Job_Offer_Added_Time"));
+                        sub.setStart_Tme(jsonData.getString("Start_Time"));
+                        sub.setEnd_Time(jsonData.getString("End_Time"));
+                        sub.setQuantity(Integer.valueOf(jsonData.getString("Quantity")));
+                        sub.setJob_Title_Description(jsonData.getString("Job_Title_Description"));
 
-                    subscript.add(sub);
+                        subscript.add(sub);
+                    }
                 }
+
 
                 //return jobOffers;
 

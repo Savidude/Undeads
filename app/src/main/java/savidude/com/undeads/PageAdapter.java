@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import savidude.com.undeads.Tabs.Tab2.JobTab;
 import savidude.com.undeads.Tabs.Tab1.OfferStatusTab;
+import savidude.com.undeads.Tabs.Tab3.NotificationTab;
 
 public class PageAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
@@ -26,11 +27,11 @@ public class PageAdapter extends FragmentStatePagerAdapter {
                 JobTab tab2 = new JobTab();
                 return tab2;
             case 2:
-                JobTab tab3 = new JobTab();
+                NotificationTab tab3 = new NotificationTab();
                 return tab3;
-            case 3:
-                JobTab tab4 = new JobTab();
-                return tab4;
+//            case 3:
+//                JobTab tab4 = new JobTab();
+//                return tab4;
             default:
                 return null;
         }

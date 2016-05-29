@@ -3,26 +3,19 @@ package savidude.com.undeads;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import savidude.com.undeads.Controllers.AlarmReceiver;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         TabLayout tabLayout = (TabLayout) findViewById(R.id.slidingtabs);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
+        tabLayout.addTab(tabLayout.newTab().setText("My Jobs"));
+        tabLayout.addTab(tabLayout.newTab().setText("View All"));
+        tabLayout.addTab(tabLayout.newTab().setText("Pending"));
+        //tabLayout.addTab(tabLayout.newTab().setText("My Profile"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -63,28 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = preferences.edit();
-        int i = preferences.getInt("numberOfLaunch", 1);
-
-        if(i < 2){
-
-            Long alarmTime = new GregorianCalendar().getTimeInMillis() + 10 * 1000;
-
-            Intent alarmIntent = new Intent(this, AlarmReceiver.class);
-
-            AlarmManager alarmManager = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
-
-            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, PendingIntent.getBroadcast(this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
-
-            Toast.makeText(MainActivity.this, "Start Time", Toast.LENGTH_LONG).show();
-            i++;
-            editor.putInt("numberOfLaunch", i);
-            editor.commit();
-        }
-
     }
 
     @Override

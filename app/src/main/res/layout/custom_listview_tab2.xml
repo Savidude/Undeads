@@ -30,6 +30,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="0.25"
+            android:gravity="right"
             android:text="Large Text"
             android:textSize="22dp" />
     </LinearLayout>

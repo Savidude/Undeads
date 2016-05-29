@@ -1,7 +1,8 @@
-package savidude.com.undeads.Controllers;
+package savidude.com.undeads;
 
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -17,11 +18,11 @@ import savidude.com.undeads.MainActivity;
  */
 public class AlarmReceiver extends BroadcastReceiver {
 
-    NotificationCompat.Builder notification;
+    static NotificationCompat.Builder notification;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        System.out.println("ENTERED ONRECEIVE METHOD");
         String job_Description = "Death God";
         String start_Time = "29-05-2016 00:00";
         String end_Time = "31-12-9999 00:00";
@@ -29,7 +30,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         createNotification(context, job_Description, start_Time, end_Time);
     }
 
-    private void createNotification(Context context, String job_description, String start_time, String end_time) {
+    public static void createNotification(Context context, String job_description, String start_time, String end_time) {
 
         String startTime[] = start_time.split(" ");
         String endTime[] = end_time.split(" ");
@@ -40,13 +41,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         notification.setAutoCancel(true);
         notification.setWhen(System.currentTimeMillis());
         notification.setContentTitle(job_description);
-        notification.setContentText("Date: " + startTime[0] + ", Start Time : " + startTime[1] + ", End Time : " + endTime[0]);
+        //notification.setContentText("Date: " + startTime[0] + ", Start Time : " + startTime[1] + ", End Time : " + endTime[0]);
+        notification.setContentText("TEST TEXT");
         notification.setContentIntent(notificIntent);
         notification.setDefaults(NotificationCompat.DEFAULT_SOUND);
 
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        nm.notify(1, notification.build());
+        Notification notif = notification.getNotification();
+        nm.notify(1, notif);
 
 
     }

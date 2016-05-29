@@ -10,9 +10,6 @@ import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
-
-import java.util.GregorianCalendar;
-
 import savidude.com.undeads.MainActivity;
 
 /**

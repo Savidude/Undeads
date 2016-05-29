@@ -3,7 +3,7 @@
     package="savidude.com.undeads">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +23,10 @@
         <activity
             android:name=".Tabs.Tab1.tab1_popup"
             android:label="Job Available"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+        <activity
+            android:name=".Tabs.Tab2.tab2_popup"
+            android:label="All Jobs"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
     </application>
 

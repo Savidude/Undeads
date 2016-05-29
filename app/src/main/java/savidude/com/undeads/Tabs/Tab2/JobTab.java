@@ -1,5 +1,6 @@
 package savidude.com.undeads.Tabs.Tab2;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import savidude.com.undeads.Controllers.AvailableJobOffersController;
 import savidude.com.undeads.Models.AcceptedJobOffer;
 import savidude.com.undeads.Models.getAllJobOffers;
 import savidude.com.undeads.R;
+import savidude.com.undeads.Tabs.Tab1.tab1_popup;
 
 // In this case, the fragment displays simple text based on the page
 public class JobTab extends Fragment {
@@ -26,6 +29,8 @@ public class JobTab extends Fragment {
     private SwipeRefreshLayout swipeContainer2;
     CustomAdapter_Tab2 adapter;
     private List<getAllJobOffers> rowItems;
+
+    public  final static String SER_KEY = "ser.job";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,19 @@ public class JobTab extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                int selectedItemID = lv.getSelectedItemPosition();
+                getAllJobOffers job = rowItems.get(i);
+                Intent mIntent = new Intent(getActivity(), tab2_popup.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable(SER_KEY, job);
+                mIntent.putExtras(mBundle);
+                startActivity(mIntent);
+            }
+        });
 
 
         return view;

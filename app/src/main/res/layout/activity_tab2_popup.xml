@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Tabs.Tab1.tab1_popup">
+    tools:context=".Tabs.Tab2.tab2_popup">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/jobDescriptionTextView"
+                    android:id="@+id/jobDescriptionTextViewT2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
@@ -36,25 +36,25 @@
                     android:textSize="26sp" />
 
                 <TextView
-                    android:id="@+id/organizationNameTextView"
+                    android:id="@+id/organizationNameTextViewT2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"/>
 
                 <TextView
-                    android:id="@+id/startTimeTextView"
+                    android:id="@+id/startTimeTextViewT2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"/>
 
                 <TextView
-                    android:id="@+id/endTimeTextView"
+                    android:id="@+id/endTimeTextViewT2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"/>
 
                 <TextView
-                    android:id="@+id/statusTextView"
+                    android:id="@+id/quantityTextViewT2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="28sp"/>

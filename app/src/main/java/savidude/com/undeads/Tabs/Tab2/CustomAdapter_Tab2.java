@@ -15,62 +15,62 @@ package savidude.com.undeads.Tabs.Tab2;
      * Created by FathimaShakoora on 28-May-16.
      */
     public class CustomAdapter_Tab2 extends BaseAdapter {
-            Context context;
-            List<getAllJobOffers> rowItem;
+        Context context;
+        List<getAllJobOffers> rowItem;
 
-            public CustomAdapter_Tab2(Context context, List<getAllJobOffers> rowItem) {
-                this.context = context;
-                this.rowItem = rowItem;
+        public CustomAdapter_Tab2(Context context, List<getAllJobOffers> rowItem) {
+            this.context = context;
+            this.rowItem = rowItem;
 
+        }
+
+        @Override
+        public int getCount() {
+
+            return rowItem.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+
+            return rowItem.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+
+            return rowItem.indexOf(getItem(position));
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater mInflater = (LayoutInflater) context
+                        .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                convertView = mInflater.inflate(R.layout.custom_listview_tab2, null);
             }
 
-            @Override
-            public int getCount() {
+            TextView org_name = (TextView) convertView.findViewById(R.id.org_name);
+            TextView job_desc = (TextView) convertView.findViewById(R.id.job_desc);
+            TextView working_time = (TextView) convertView.findViewById(R.id.working_time);
 
-                return rowItem.size();
-            }
+            getAllJobOffers row_pos = rowItem.get(position);
 
-            @Override
-            public Object getItem(int position) {
+            org_name.setText(row_pos.getOrgName());
+            job_desc.setText(row_pos.getJobTitleDescription());
 
-                return rowItem.get(position);
-            }
+            String work_Time_Start = row_pos.getStartTime();
+            String work_Time_End = row_pos.getEndTime();
 
-            @Override
-            public long getItemId(int position) {
+            String[] holdStart = work_Time_Start.split(" ");
+            String[] holdEnd = work_Time_End.split(" ");
 
-                return rowItem.indexOf(getItem(position));
-            }
+            //working_time.setText(holdStart[0]+"\t"+holdStart[1]+" - "+holdEnd[1]);
 
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            return convertView;
 
-                if (convertView == null) {
-                    LayoutInflater mInflater = (LayoutInflater) context
-                            .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-                    convertView = mInflater.inflate(R.layout.custom_listview_tab2, null);
-                }
-
-                TextView org_name = (TextView) convertView.findViewById(R.id.org_name);
-                TextView job_desc = (TextView) convertView.findViewById(R.id.job_desc);
-                TextView working_time = (TextView) convertView.findViewById(R.id.working_time);
-
-                getAllJobOffers row_pos = rowItem.get(position);
-
-                org_name.setText(row_pos.getOrgName());
-                job_desc.setText(row_pos.getJobTitleDescription());
-
-                String work_Time_Start = row_pos.getStartTime();
-                String work_Time_End = row_pos.getEndTime();
-
-                String[] holdStart = work_Time_Start.split(":");
-                String[] holdEnd = work_Time_End.split(":");
-
-                working_time.setText(holdStart[0]+"\t\t\t"+holdStart[1]+" - "+holdEnd[1]);
-
-                return convertView;
-
-            }
+        }
     }
 
 

@@ -1,9 +1,11 @@
 package savidude.com.undeads.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by sky on 5/28/2016.
  */
-public class getAllJobOffers {
+public class getAllJobOffers implements Serializable {
 
     private String orgName;
     private String startTime;

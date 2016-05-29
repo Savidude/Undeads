@@ -27,37 +27,71 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/jobDescriptionTextViewT2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_weight="1"
-                    android:textSize="26sp" />
 
-                <TextView
-                    android:id="@+id/organizationNameTextViewT2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"/>
+                    <TextView
+                        android:text="Job Description: "
+                        android:textAllCaps="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:textSize="25sp" />
+                    <TextView
+                        android:id="@+id/jobDescriptionTextViewT2"
+                        android:padding="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/startTimeTextViewT2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"/>
+                    <TextView
+                        android:text="Organization: "
+                        android:textAllCaps="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"/>
+                    <TextView
+                        android:id="@+id/organizationNameTextViewT2"
+                        android:padding="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
 
-                <TextView
-                    android:id="@+id/endTimeTextViewT2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"/>
+                    <TextView
+                        android:text="Work Time: "
+                        android:textAllCaps="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"/>
 
-                <TextView
-                    android:id="@+id/quantityTextViewT2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="28sp"/>
+
+                    <TextView
+                        android:id="@+id/startTimeTextViewT2"
+                        android:padding="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/endTimeTextViewT2"
+                        android:padding="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+
+                    <TextView
+                        android:text="Positions Open: "
+                        android:textAllCaps="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"/>
+                    <TextView
+                        android:id="@+id/quantityTextViewT2"
+                        android:padding="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
 
             </LinearLayout>
         </ScrollView>
